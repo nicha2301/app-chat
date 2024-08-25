@@ -1,26 +1,20 @@
 package fit.nlu.appchat.service;
 
 import fit.nlu.appchat.dto.request.UserCreationRequest;
-import fit.nlu.appchat.dto.response.ApiResponse;
+import fit.nlu.appchat.dto.request.UserUpdateRequest;
 import fit.nlu.appchat.dto.response.UserResponse;
 import fit.nlu.appchat.entity.User;
 import fit.nlu.appchat.exception.AppException;
-import fit.nlu.appchat.exception.ErrorCode;
+import fit.nlu.appchat.enums.ErrorCode;
 import fit.nlu.appchat.mapper.UserMapper;
 import fit.nlu.appchat.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,8 +25,11 @@ public class UserService {
     UserMapper userMapper;
 
     public List<UserResponse> getAllUsers() {
-        return userRepository.findAll().stream()
+        var list = userRepository.findAll().stream()
                 .map(userMapper::toUserResponse).toList();
+        if (list.isEmpty())
+            throw new AppException(ErrorCode.USER_NOT_EXISTED);
+        return list;
     }
 
     public UserResponse createUser(UserCreationRequest request) {
@@ -45,9 +42,35 @@ public class UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public UserResponse findByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        return userMapper.toUserResponse(user);
     }
 
+    public UserResponse getUserById(String id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        return userMapper.toUserResponse(user);
+    }
+
+    public Void deleteUserById(String id) {
+        if (userRepository.existsByUsername(id))
+            throw new AppException(ErrorCode.USER_NOT_EXISTED);
+        userRepository.deleteById(id);
+        return null;
+    }
+
+    public UserResponse updateUser(String userId, UserUpdateRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        user.builder()
+                .username(request.getUsername())
+                .fullName(request.getFullName());
+
+        User updatedUser = userRepository.save(user);
+        return userMapper.toUserResponse(updatedUser);
+    }
 }
 

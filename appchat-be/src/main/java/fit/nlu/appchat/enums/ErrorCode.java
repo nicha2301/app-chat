@@ -1,4 +1,4 @@
-package fit.nlu.appchat.exception;
+package fit.nlu.appchat.enums;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

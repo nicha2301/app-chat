@@ -3,13 +3,12 @@ package fit.nlu.appchat.service;
 import fit.nlu.appchat.dto.response.MessageResponse;
 import fit.nlu.appchat.entity.Message;
 import fit.nlu.appchat.exception.AppException;
-import fit.nlu.appchat.exception.ErrorCode;
+import fit.nlu.appchat.enums.ErrorCode;
 import fit.nlu.appchat.mapper.MessageMapper;
 import fit.nlu.appchat.repository.MessageRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

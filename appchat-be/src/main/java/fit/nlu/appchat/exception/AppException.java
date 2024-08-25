@@ -1,5 +1,7 @@
 package fit.nlu.appchat.exception;
 
+import fit.nlu.appchat.enums.ErrorCode;
+
 public class AppException extends RuntimeException {
 
     public AppException(ErrorCode errorCode) {
