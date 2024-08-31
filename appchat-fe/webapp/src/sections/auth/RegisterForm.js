@@ -6,75 +6,92 @@ import FormProvider from '../../components/hook-form/FormProvider';
 import { Alert, Button, IconButton, InputAdornment, Stack } from '@mui/material';
 import { RHFTextField } from '../../components/hook-form';
 import { Eye, EyeSlash } from 'phosphor-react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate(); 
 
-    const [showPassword, setShowPassword] = useState(false);
+  //validation rules 
+  const registerSchema = Yup.object().shape({
+    fullName: Yup.string().required('Full Name is required'),
+    username: Yup.string().required('Username is required'),
+    password: Yup.string().required('Password is required')
+  });
 
-    //validation rules 
-    const registerSchema = Yup.object().shape({
-      firstName:Yup.string().required('First Name is required'),
-      lastName:Yup.string().required('Last Name is required'),
-      email:Yup.string().required('Email is required').email('Email must be a valid email address'),
-      password:Yup.string().required('Password is required')
-    });
-  
-    const defaultValues = {
-      firstName:'',
-      lastName:'',
-      email:'dulanjali@gmail.com',
-      password:'dula@123'
-    };
-  
-    const methods = useForm({
-      resolver: yupResolver(registerSchema),
-      defaultValues
-    });
-  
-    const {reset, setError, handleSubmit, formState:{errors, isSubmitting, isSubmitSuccessful}}
-     = methods;
-  
-     const onSubmit = async (data) =>{
-          try {
-              //submit data to backend
-          } catch (error) {
-              console.log(error);
-              reset();
-              setError('afterSubmit',{
-                  ...error,
-                  message: error.message
-              })
-          }
-     }
+
+  const methods = useForm({
+    resolver: yupResolver(registerSchema)
+  });
+
+  const { reset, setError, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } }
+    = methods;
+
+  const onSubmit = async (data) => {
+    try {
+      //submit data to backend
+      const response = await fetch('http://localhost:8080/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to register. Please try again.');
+      }
+
+      const result = await response.json();
+      console.log('Registration successful:', result);
+
+      setSuccessMessage('Registration successful! Redirecting to login...');
+      
+      setTimeout(() => {
+        navigate('/auth/login');
+      }, 2000); 
+
+    } catch (error) {
+      console.log(error);
+      reset();
+      setError('afterSubmit', {
+        ...error,
+        message: error.message
+      })
+    }
+  }
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={3}>
+      <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity='error'>{errors.afterSubmit.message}</Alert>}
-        <Stack direction={{xs:'column', sm:'row'}} spacing={2}>
-            <RHFTextField name="firstName" label='First Name'/>
-            <RHFTextField name="lastName" label='Last Name'/>
-        </Stack>
-        <RHFTextField name='email' label='Email address'/>
+        {!!successMessage && <Alert severity='success'>{successMessage}</Alert>}
+        <RHFTextField name="fullName" label='Full Name' />
+        <RHFTextField name="username" label='Username' />
         <RHFTextField name='password' label='Password' type={showPassword ? 'text' : 'password'}
-        InputProps={{endAdornment:(
-            <InputAdornment>
-            <IconButton onClick={()=>{
-                setShowPassword(!showPassword);
-            }}>
-                {showPassword ? <Eye/>: <EyeSlash/>}
-            </IconButton>
-            </InputAdornment>
-        )}}/>
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <IconButton onClick={() => {
+                  setShowPassword(!showPassword);
+                }}>
+                  {showPassword ? <Eye /> : <EyeSlash />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }} />
         <Button fullWidth color='inherit' size='large' type='submit' variant='contained'
-        sx={{bgcolor:'text.primary', color:(theme)=> theme.palette.mode === 'light' ?
-         'common.white':'grey.800',
-         '&:hover':{
-            bgcolor:'text.primary',
-            color:(theme)=> theme.palette.mode === 'light' ? 'common.white':'grey.800',
-         }}}>Create Account</Button>
-        </Stack>
-        
+          sx={{
+            bgcolor: 'text.primary', color: (theme) => theme.palette.mode === 'light' ?
+              'common.white' : 'grey.800',
+            '&:hover': {
+              bgcolor: 'text.primary',
+              color: (theme) => theme.palette.mode === 'light' ? 'common.white' : 'grey.800',
+            }
+          }}>Create Account</Button>
+      </Stack>
+
     </FormProvider>
   )
 }
