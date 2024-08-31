@@ -44,9 +44,9 @@ const PrivateRoute = ({ children }) => {
   }, [authToken]);
 
   if (isValidToken === null) {
-    return null;
+    return <div>Loading...</div>;
   }
-
+  
   return isValidToken ? children : <Navigate to="/auth/login" />;
 };
 

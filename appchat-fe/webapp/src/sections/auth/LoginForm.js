@@ -27,7 +27,6 @@ const LoginForm = () => {
     = methods;
 
   const onSubmit = async (data) => {
-    console.log('Submitted data:', data);
     try {
       const response = await fetch('http://localhost:8080/api/auth/token', {
         method: 'POST',
@@ -38,16 +37,13 @@ const LoginForm = () => {
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Response error:', errorText);
         throw new Error('Failed to log in.');
       }
 
       const result = await response.json();
-      console.log('Login successful:', result);
 
       // Lưu token vào localStorage
-      localStorage.setItem('authToken', result.token);
+      localStorage.setItem('authToken', result.result.token);
 
       setSuccessMessage('Login successful! Redirecting to app...');
 
@@ -56,7 +52,6 @@ const LoginForm = () => {
       }, 2000);
 
     } catch (error) {
-      console.error('Error:', error);
       reset();
       setError('afterSubmit', {
         ...error,
