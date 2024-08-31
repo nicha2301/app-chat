@@ -8,11 +8,12 @@ import MainLayout from "../layouts/main";
 // config
 import { DEFAULT_PATH } from "../config";
 import LoadingScreen from "../components/LoadingScreen";
+import PrivateRoute from "./PrivateRoute";
 //import Settings from "../pages/dashboard/Settings";
 
 const Loadable = (Component) => (props) => {
   return (
-    <Suspense fallback={<LoadingScreen />}> 
+    <Suspense fallback={<LoadingScreen />}>
       <Component {...props} />
     </Suspense>
   );
@@ -22,17 +23,21 @@ export default function Router() {
   return useRoutes([
     {
       path: '/auth',
-      element: <MainLayout/>,
-      children:[
-        {element: <LoginPage/>, path:'login'},
-        {element: <RegisterPage/>, path:'register'},
-        {element: <ResetPasswordPage/>, path:'reset-password'},
-        {element: <NewPasswordPage/>, path:'new-password'},
+      element: <MainLayout />,
+      children: [
+        { element: <LoginPage />, path: 'login' },
+        { element: <RegisterPage />, path: 'register' },
+        { element: <ResetPasswordPage />, path: 'reset-password' },
+        { element: <NewPasswordPage />, path: 'new-password' },
       ]
     },
     {
       path: "/",
-      element: <DashboardLayout />,
+      element: (
+        <PrivateRoute>
+          <DashboardLayout />
+        </PrivateRoute>
+      ),
       children: [
         { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
         { path: "app", element: <GeneralApp /> },

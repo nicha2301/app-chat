@@ -46,6 +46,9 @@ const LoginForm = () => {
       const result = await response.json();
       console.log('Login successful:', result);
 
+      // Lưu token vào localStorage
+      localStorage.setItem('authToken', result.token);
+
       setSuccessMessage('Login successful! Redirecting to app...');
 
       setTimeout(() => {
