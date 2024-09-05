@@ -45,6 +45,20 @@ const LoginForm = () => {
       // Lưu token vào localStorage
       localStorage.setItem('authToken', result.result.token);
 
+      const getUser = await fetch('http://localhost:8080/api/users/info', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + result.result.token
+        }
+      });
+
+      const userData = await getUser.json();
+
+      console.log(userData)
+
+      localStorage.setItem('user', JSON.stringify(userData.result));
+
       setSuccessMessage('Login successful! Redirecting to app...');
 
       setTimeout(() => {

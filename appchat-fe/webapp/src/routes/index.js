@@ -36,7 +36,7 @@ export default function Router() {
       element: (
         <PrivateRoute>
           <DashboardLayout />
-        </PrivateRoute>
+         </PrivateRoute>
       ),
       children: [
         { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
