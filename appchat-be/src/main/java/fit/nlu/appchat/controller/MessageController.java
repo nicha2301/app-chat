@@ -24,7 +24,7 @@ public class MessageController {
 
     @PostMapping
     public ApiResponse<MessageResponse> sendMessage(@RequestBody MessageRequest request) {
-        MessageResponse response = messageService.sendMessage(request.getSenderId(), request.getReceiverId(), request.getContent());
+        MessageResponse response = messageService.sendMessage(request);
         return ApiResponse.<MessageResponse>builder()
                 .code(HttpStatus.CREATED.value())
                 .message("Message sent successfully")

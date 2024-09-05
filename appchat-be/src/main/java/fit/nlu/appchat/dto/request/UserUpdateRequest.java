@@ -11,4 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class UserUpdateRequest {
     String username;
     String fullName;
+    String img;
 }

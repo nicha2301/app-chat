@@ -12,4 +12,5 @@ public class MessageRequest {
     String senderId;
     String receiverId;
     String content;
+    String messageType;
 }

@@ -9,8 +9,14 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
 
     @MessageMapping("/chat")
-    @SendTo("/topic/messages")
+    @SendTo("/user/queue/messages")
     public Message send(Message message) {
+        return message;
+    }
+
+    @MessageMapping("/chat/private")
+    @SendTo("/user/{receiverId}/queue/messages")
+    public Message sendPrivateMessage(Message message) {
         return message;
     }
 }

@@ -1,5 +1,6 @@
 package fit.nlu.appchat.service;
 
+import fit.nlu.appchat.dto.request.MessageRequest;
 import fit.nlu.appchat.dto.response.MessageResponse;
 import fit.nlu.appchat.entity.Message;
 import fit.nlu.appchat.exception.AppException;
@@ -22,12 +23,8 @@ public class MessageService {
     MessageRepository messageRepository;
     MessageMapper messageMapper;
 
-    public MessageResponse sendMessage(String senderId, String receiverId, String content) {
-        Message message = new Message();
-        message.setSenderId(senderId);
-        message.setReceiverId(receiverId);
-        message.setContent(content);
-        message.setTimestamp(LocalDateTime.now());
+    public MessageResponse sendMessage(MessageRequest request) {
+        Message message = messageMapper.toMessage(request);
 
         Message savedMessage = messageRepository.save(message);
         return messageMapper.toMessageResponse(savedMessage);

@@ -14,5 +14,6 @@ public class MessageResponse {
     private String senderId;
     private String receiverId;
     private String content;
+    String messageType;
     private LocalDateTime timestamp;
 }

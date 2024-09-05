@@ -38,21 +38,19 @@ public class UserController {
                 .build();
     }
 
-    @GetMapping("/{username}")
-    ApiResponse<UserResponse> getUserByUsername(@PathVariable String username) {
-        return ApiResponse.<UserResponse>builder()
-                .code(HttpStatus.OK.value())
-                .message("get user successfully")
-                .result(userService.findByUsername(username))
-                .build();
-    }
-
     @GetMapping("/{id}")
     ApiResponse<UserResponse> getUserById(@PathVariable String id) {
         return ApiResponse.<UserResponse>builder()
                 .code(HttpStatus.OK.value())
                 .message("get user successfully")
                 .result(userService.getUserById(id))
+                .build();
+    }
+
+    @GetMapping("/info")
+    ApiResponse<UserResponse> getMyInfo(){
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.getMyInfo())
                 .build();
     }
 
@@ -66,7 +64,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<UserResponse> updateUser(@PathVariable String id, @RequestBody UserUpdateRequest request) {
+    ApiResponse<UserResponse> updateUser(@PathVariable String id, @RequestBody UserUpdateRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .code(HttpStatus.OK.value())
                 .message("update user successfully")
