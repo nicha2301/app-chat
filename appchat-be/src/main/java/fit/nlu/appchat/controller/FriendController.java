@@ -50,8 +50,8 @@ public class FriendController {
     }
 
     @PostMapping("/reject/{friendId}")
-    public ApiResponse<String> rejectFriendRequest(@PathVariable String friendId) {
-        friendService.rejectFriendRequest(friendId);
+    public ApiResponse<String> rejectFriendRequest(@PathVariable String userId, @PathVariable String friendId) {
+        friendService.rejectFriendRequest(userId, friendId);
         return ApiResponse.<String>builder()
                 .code(HttpStatus.OK.value())
                 .message("Friend request rejected")

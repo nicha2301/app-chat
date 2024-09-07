@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +26,10 @@ public class FriendService {
     FriendMapper friendMapper;
 
     public FriendResponse sendFriendRequest(FriendRequest request) {
+        Optional<Friend> existingRequest = friendRepository.findByUserIdAndFriendIdAndStatus(request.getUserId(), request.getFriendId(), FriendStatus.PENDING);
+        if (existingRequest.isPresent()) {
+            throw new AppException(ErrorCode.FRIEND_REQUEST_ALREADY_EXISTS);
+        }
         Friend friend = friendMapper.toFriend(request);
         friend.setStatus(FriendStatus.PENDING);
         friend.setCreatedAt(new Date());
@@ -48,7 +53,11 @@ public class FriendService {
         friendRepository.save(friend);
     }
 
-    public void rejectFriendRequest(String friendId) {
+    public void rejectFriendRequest(String userId, String friendId) {
+        Optional<Friend> existingRequest = friendRepository.findByUserIdAndFriendIdAndStatus(friendId, userId, FriendStatus.PENDING);
+        if (!existingRequest.isPresent()) {
+            throw new AppException(ErrorCode.FRIEND_REQUEST_NOT_FOUND);
+        }
         Friend friend = friendRepository.findById(friendId)
                 .orElseThrow(() -> new AppException(ErrorCode.FRIEND_NOT_EXISTED));
         friend.setStatus(FriendStatus.REJECTED);
