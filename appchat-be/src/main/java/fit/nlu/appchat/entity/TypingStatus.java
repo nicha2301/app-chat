@@ -5,17 +5,18 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Document(collection = "invalidTokens")
-public class InvalidatedToken {
+@Document(collection = "typingStatus")
+public class TypingStatus {
     @Id
     String id;
-    Date expiryTime;
+    String userId;
+    String chatType;
+    String chatId;
+    boolean isTyping;
+
 }

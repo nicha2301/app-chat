@@ -5,20 +5,21 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Document(collection = "messages")
-public class Message {
+@Document(collection = "groups")
+public class Group {
     @Id
     String id;
-    String senderId;
-    String receiverId;
-    String content;
-    String messageType;
-    LocalDateTime timestamp;
+    String groupName;
+    String creatorId;
+    Date createdAt;
+    List<User> members;
+
 }

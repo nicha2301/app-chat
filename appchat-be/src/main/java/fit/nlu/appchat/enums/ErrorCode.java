@@ -19,8 +19,10 @@ public enum ErrorCode {
     EMAIL_ALREADY_REGISTERED(1010, "Email already registered", HttpStatus.CONFLICT),
     SESSION_EXPIRED(1011, "Session expired", HttpStatus.UNAUTHORIZED),
     DATABASE_ERROR(1012, "Database error", HttpStatus.INTERNAL_SERVER_ERROR),
-    MESSAGE_NOT_EXISTED(1009, "Message does not exist", HttpStatus.NOT_FOUND),
-    SERVICE_UNAVAILABLE(1013, "Service temporarily unavailable", HttpStatus.SERVICE_UNAVAILABLE);
+    SERVICE_UNAVAILABLE(1013, "Service temporarily unavailable", HttpStatus.SERVICE_UNAVAILABLE),
+    MESSAGE_NOT_EXISTED(1014, "Message does not exist", HttpStatus.NOT_FOUND),
+    FRIEND_NOT_EXISTED(1015, "Friend does not exist", HttpStatus.NOT_FOUND),
+    NOT_FRIENDS(1016, "Both users are not friends ", HttpStatus.BAD_REQUEST);
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

@@ -32,6 +32,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     private final String[] PUBLIC_ENDPOINTS = {
             "/api/users",
             "/api/messages",
+            "/api/friends",
             "/api/auth/token",
             "/api/auth/introspect",
             "/api/auth/logout",

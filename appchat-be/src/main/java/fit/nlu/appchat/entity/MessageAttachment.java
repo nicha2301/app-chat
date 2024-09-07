@@ -5,17 +5,22 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Document(collection = "invalidTokens")
-public class InvalidatedToken {
+@Document(collection = "messageAttachments")
+public class MessageAttachment {
     @Id
     String id;
-    Date expiryTime;
+    String messageId;
+    String filePath;
+    String fileType;
+    Date uploadedAt;
+
 }

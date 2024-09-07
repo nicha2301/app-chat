@@ -1,9 +1,9 @@
 package fit.nlu.appchat.dto.response;
 
+import fit.nlu.appchat.enums.FriendStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -11,11 +11,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MessageResponse {
-    String senderId;
-    String receiverId;
-    String content;
-    String messageType;
-    Date sentAt;
-    Date readAt;
+public class FriendResponse {
+    String userId;
+    String friendId;
+    FriendStatus status;
+    Date createdAt;
 }

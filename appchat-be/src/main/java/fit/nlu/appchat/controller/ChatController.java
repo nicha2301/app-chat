@@ -1,6 +1,6 @@
 package fit.nlu.appchat.controller;
 
-import fit.nlu.appchat.entity.Message;
+import fit.nlu.appchat.entity.PrivateMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -10,13 +10,13 @@ public class ChatController {
 
     @MessageMapping("/chat")
     @SendTo("/user/queue/messages")
-    public Message send(Message message) {
-        return message;
+    public PrivateMessage send(PrivateMessage privateMessage) {
+        return privateMessage;
     }
 
     @MessageMapping("/chat/private")
     @SendTo("/user/{receiverId}/queue/messages")
-    public Message sendPrivateMessage(Message message) {
-        return message;
+    public PrivateMessage sendPrivateMessage(PrivateMessage privateMessage) {
+        return privateMessage;
     }
 }
