@@ -1,27 +1,36 @@
 package fit.nlu.appchat.service;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import fit.nlu.appchat.dto.request.MessageRequest;
 import fit.nlu.appchat.dto.response.MessageResponse;
 import fit.nlu.appchat.entity.PrivateMessage;
+import fit.nlu.appchat.enums.ErrorCode;
 import fit.nlu.appchat.enums.FriendStatus;
 import fit.nlu.appchat.exception.AppException;
-import fit.nlu.appchat.enums.ErrorCode;
 import fit.nlu.appchat.mapper.MessageMapper;
 import fit.nlu.appchat.repository.FriendRepository;
 import fit.nlu.appchat.repository.MessageRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MessageService {
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+
+
     MessageRepository messageRepository;
     MessageMapper messageMapper;
     FriendRepository friendRepository;
@@ -49,15 +58,16 @@ public class MessageService {
                 .collect(Collectors.toList());
     }
 
-    public List<MessageResponse> getConversation(String user1Id, String user2Id) {
-        boolean areFriends = friendRepository.existsByUserIdAndFriendIdAndStatus(user1Id, user2Id, FriendStatus.ACCEPTED) ||
-                friendRepository.existsByUserIdAndFriendIdAndStatus(user2Id, user1Id, FriendStatus.ACCEPTED);
+    public List<MessageResponse> getConversation(String user1Id, String user2Id, String cursorId, int limit) {
+        Pageable pageable = PageRequest.of(0, limit);
 
-        if (!areFriends) {
-            throw new AppException(ErrorCode.NOT_FRIENDS);
+        List<PrivateMessage> privateMessages;
+        if (cursorId != null && !cursorId.isEmpty()) {
+            privateMessages = messageRepository.findConversationBeforeId(user1Id, user2Id, cursorId, pageable);
+        } else {
+            privateMessages = messageRepository.findConversation(user1Id, user2Id, pageable);
         }
 
-        List<PrivateMessage> privateMessages = messageRepository.findConversation(user1Id, user2Id);
         return privateMessages.stream()
                 .map(messageMapper::toMessageResponse)
                 .collect(Collectors.toList());
@@ -67,6 +77,19 @@ public class MessageService {
         PrivateMessage privateMessage = messageRepository.findById(messageId)
                 .orElseThrow(() -> new AppException(ErrorCode.MESSAGE_NOT_EXISTED));
         messageRepository.delete(privateMessage);
+    }
+
+    private Optional<Date> convertToDate(String cursor) {
+        if (cursor == null || cursor.isEmpty()) {
+            return Optional.empty();
+        }
+
+        try {
+            ZonedDateTime zonedDateTime = ZonedDateTime.parse(cursor, DATE_FORMATTER);
+            return Optional.of(Date.from(zonedDateTime.toInstant()));
+        } catch (Exception e) {
+            throw new AppException(ErrorCode.INVALID_DATE_FORMAT);
+        }
     }
 
 }

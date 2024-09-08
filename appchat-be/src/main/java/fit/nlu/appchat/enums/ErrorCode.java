@@ -1,8 +1,9 @@
 package fit.nlu.appchat.enums;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+
+import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
@@ -22,9 +23,10 @@ public enum ErrorCode {
     SERVICE_UNAVAILABLE(1013, "Service temporarily unavailable", HttpStatus.SERVICE_UNAVAILABLE),
     MESSAGE_NOT_EXISTED(1014, "Message does not exist", HttpStatus.NOT_FOUND),
     FRIEND_NOT_EXISTED(1015, "Friend does not exist", HttpStatus.NOT_FOUND),
-    NOT_FRIENDS(1016, "Both users are not friends ", HttpStatus.BAD_REQUEST),
+    NOT_FRIENDS(1016, "Both users are not friends", HttpStatus.BAD_REQUEST),
     FRIEND_REQUEST_ALREADY_EXISTS(1017, "Friend request already exists", HttpStatus.CONFLICT),
-    FRIEND_REQUEST_NOT_FOUND(1018, "Request does not exist", HttpStatus.NOT_FOUND);
+    FRIEND_REQUEST_NOT_FOUND(1018, "Request does not exist", HttpStatus.NOT_FOUND),
+    INVALID_DATE_FORMAT(1019, "Invalid date format", HttpStatus.BAD_REQUEST);
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;
