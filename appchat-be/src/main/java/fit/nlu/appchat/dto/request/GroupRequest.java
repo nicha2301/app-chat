@@ -1,9 +1,7 @@
-package fit.nlu.appchat.entity;
+package fit.nlu.appchat.dto.request;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
@@ -13,14 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Document(collection = "groups")
-public class Group {
-    @Id
-    String id;
+public class GroupRequest {
     String groupName;
     String creatorId;
+    List<String> memberIds;
     List<String> adminIds;
-    List<String> members;
     String avatar;
-    Date createdAt;
 }

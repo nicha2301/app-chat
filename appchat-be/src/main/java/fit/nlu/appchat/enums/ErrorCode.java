@@ -26,7 +26,9 @@ public enum ErrorCode {
     NOT_FRIENDS(1016, "Both users are not friends", HttpStatus.BAD_REQUEST),
     FRIEND_REQUEST_ALREADY_EXISTS(1017, "Friend request already exists", HttpStatus.CONFLICT),
     FRIEND_REQUEST_NOT_FOUND(1018, "Request does not exist", HttpStatus.NOT_FOUND),
-    INVALID_DATE_FORMAT(1019, "Invalid date format", HttpStatus.BAD_REQUEST);
+    INVALID_DATE_FORMAT(1019, "Invalid date format", HttpStatus.BAD_REQUEST),
+    GROUP_NOT_FOUND(1020, "Group not found", HttpStatus.NOT_FOUND),
+    GROUP_OR_MEMBER_NOT_FOUND(1021, "Group or member not found", HttpStatus.NOT_FOUND);
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

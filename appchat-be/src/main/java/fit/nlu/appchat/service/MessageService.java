@@ -30,7 +30,6 @@ import lombok.experimental.FieldDefaults;
 public class MessageService {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
-
     MessageRepository messageRepository;
     MessageMapper messageMapper;
     FriendRepository friendRepository;
