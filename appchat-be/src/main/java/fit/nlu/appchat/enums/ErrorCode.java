@@ -28,7 +28,11 @@ public enum ErrorCode {
     FRIEND_REQUEST_NOT_FOUND(1018, "Request does not exist", HttpStatus.NOT_FOUND),
     INVALID_DATE_FORMAT(1019, "Invalid date format", HttpStatus.BAD_REQUEST),
     GROUP_NOT_FOUND(1020, "Group not found", HttpStatus.NOT_FOUND),
-    GROUP_OR_MEMBER_NOT_FOUND(1021, "Group or member not found", HttpStatus.NOT_FOUND);
+    GROUP_OR_MEMBER_NOT_FOUND(1021, "Group or member not found", HttpStatus.NOT_FOUND),
+    GROUP_CREATOR(1022, "You do not have permission, only delete group!", HttpStatus.FORBIDDEN),
+    NOT_ENOUGH_MEMBER(1023, "At least 2 member added",HttpStatus.BAD_REQUEST ),
+    MEMBER_NOT_FOUND(1024, "Member not exist in group", HttpStatus.BAD_REQUEST),
+    CANNOT_REMOVE_CREATOR(1025, "Creators cannot be removed from the admin list " , HttpStatus.FORBIDDEN);
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

@@ -20,7 +20,7 @@ public class Group {
     String groupName;
     String creatorId;
     List<String> adminIds;
-    List<String> members;
+    List<String> memberIds;
     String avatar;
     Date createdAt;
 }

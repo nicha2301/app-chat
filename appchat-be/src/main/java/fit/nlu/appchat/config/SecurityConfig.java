@@ -32,6 +32,7 @@ public class SecurityConfig implements WebMvcConfigurer {
     private final String[] PUBLIC_ENDPOINTS = {
             "/api/users",
             "/api/messages",
+            "/api/groups",
             "/api/friends",
             "/api/auth/token",
             "/api/auth/introspect",
@@ -45,7 +46,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
-                        .requestMatchers(HttpMethod.GET).permitAll()
+//                        .requestMatchers(HttpMethod.GET).permitAll()
                         .anyRequest().authenticated());
 
         httpSecurity.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(customJwtDecoder)
