@@ -11,7 +11,7 @@ import {
   View,
 } from "react-native";
 import Swiper from "react-native-swiper";
-import { carouselStyles } from "../pages/call/Styles";
+import { carouselStyles } from "./Styles";
 
 const images = [
   {

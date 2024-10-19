@@ -9,84 +9,12 @@ import {
   Alert,
 } from "react-native";
 import { BlurView } from "expo-blur";
-import { carouselStyles, listChatstyles } from "../call/Styles";
+import { carouselStyles, listChatstyles } from "../../common/Styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { Message } from "@/components/common/model";
+import { messages } from "@/components/common/Data";
 
-interface Message {
-  id: number;
-  sender: string;
-  content: string;
-  time: string;
-  avatarUri: string;
-  isOnline: boolean;
-  unreadCount: number;
-  notificationsEnabled: boolean;
-}
-
-const messages: Message[] = [
-  {
-    id: 1,
-    sender: "Alice",
-    content:
-      "Hey! How are you?oapisejfhkjlsdfhbksjdfhkasldjfslkdjfhlsdkajhfaljskdfh",
-    time: "10:30 AM",
-    avatarUri: "https://randomuser.me/api/portraits/women/1.jpg",
-    isOnline: true,
-    unreadCount: 1,
-    notificationsEnabled: true,
-  },
-  {
-    id: 2,
-    sender: "Bob",
-    content: "Are we still on for lunch?",
-    time: "09:45 AM",
-    avatarUri: "https://randomuser.me/api/portraits/men/2.jpg",
-    isOnline: false,
-    unreadCount: 0,
-    notificationsEnabled: false,
-  },
-  {
-    id: 3,
-    sender: "Charlie",
-    content: "Check out this picture!",
-    time: "Yesterday",
-    avatarUri: "https://randomuser.me/api/portraits/men/3.jpg",
-    isOnline: false,
-    unreadCount: 3,
-    notificationsEnabled: true,
-  },
-  {
-    id: 4,
-    sender: "Charlie",
-    content: "Check out this picture!",
-    time: "Yesterday",
-    avatarUri: "https://randomuser.me/api/portraits/men/3.jpg",
-    isOnline: false,
-    unreadCount: 3,
-    notificationsEnabled: true,
-  },
-  {
-    id: 5,
-    sender: "Charlie",
-    content: "Check out this picture!",
-    time: "Yesterday",
-    avatarUri: "https://randomuser.me/api/portraits/men/3.jpg",
-    isOnline: false,
-    unreadCount: 3,
-    notificationsEnabled: true,
-  },
-  {
-    id: 6,
-    sender: "Charlie",
-    content: "Check out this picture!",
-    time: "Yesterday",
-    avatarUri: "https://randomuser.me/api/portraits/men/3.jpg",
-    isOnline: false,
-    unreadCount: 3,
-    notificationsEnabled: true,
-  },
-];
 
 const MessageList: React.FC = () => {
   const [visibleIcons, setVisibleIcons] = useState<number | null>(null);

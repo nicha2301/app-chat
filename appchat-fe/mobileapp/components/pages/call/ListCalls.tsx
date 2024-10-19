@@ -1,8 +1,8 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
-import callsData from "./CallData";
 import CallItem from "./CallItem";
-import { flatStyle } from "./Styles";
+import { flatStyle } from "../../common/Styles";
+import { callsData } from "../../common/Data";
 
 export const ListCalls = () => {
   return (

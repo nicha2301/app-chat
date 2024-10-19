@@ -1,14 +1,15 @@
 import { BlurView } from "expo-blur";
 import React from "react";
 import { View } from "react-native";
-import Footer from "../../common/Footer";
 import Header from "../../common/Header";
-import { ListCalls } from "./ListCalls";
 import Nav from "../../common/Nav";
 import { screenStyles } from "../../common/Styles";
+import { ListCalls } from "../call/ListCalls";
+import Footer from "@/components/common/Footer";
+import RecentList from "./ListSpecial";
 import { Background } from "@/components/common/Svg";
 
-const CallListScreen: React.FC = () => {
+const SpecialScreen: React.FC = () => {
   return (
     <View style={screenStyles.container}>
       <Background />
@@ -19,12 +20,11 @@ const CallListScreen: React.FC = () => {
       >
         <Header />
         <Nav />
-        <ListCalls />
+        <RecentList />
         <Footer />
       </BlurView>
     </View>
   );
 };
 
-
-export default CallListScreen;
+export default SpecialScreen;

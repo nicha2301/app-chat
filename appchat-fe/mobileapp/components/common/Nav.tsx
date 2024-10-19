@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import { SvgXml } from "react-native-svg";
-import { navStyles } from "../pages/call/Styles";
+import { navStyles } from "./Styles";
 
 const Nav: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

@@ -6,10 +6,13 @@ export default function Page() {
     <View style={styles.container}>
       <View style={styles.main}>
         <Link style={styles.title} href={"/Call"}>
-        Call
+          Call
         </Link>
         <Link style={styles.title} href={"/ListChat"}>
-        ListChat
+          ListChat
+        </Link>
+        <Link style={styles.title} href={"/Special"} >
+          Special
         </Link>
       </View>
     </View>

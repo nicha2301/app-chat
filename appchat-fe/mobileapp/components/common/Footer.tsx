@@ -1,7 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
-import { footerStyles } from "../pages/call/Styles";
+import { footerStyles } from "./Styles";
 
 const Footer: React.FC = () => {
   return (

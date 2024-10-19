@@ -98,7 +98,7 @@ export const flatStyle = StyleSheet.create({
     backgroundColor: "white",
     fontWeight: "bold",
     borderBottomWidth: 1,
-    borderColor: "#F1F1F1",
+    borderColor: "#F5F5F5",
     fontSize: 16,
     paddingBottom: 10,
     paddingTop: 10,
@@ -111,18 +111,10 @@ export const ListCallItems = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 10,
-    marginVertical: 8,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    marginVertical: 15,
     marginHorizontal: 16,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
   },
   avatar: {
     width: 50,
@@ -133,9 +125,17 @@ export const ListCallItems = StyleSheet.create({
     flex: 1,
     marginLeft: 15,
   },
+  borderBottom: {
+    position: "absolute",
+    width: width - 125,
+    bottom: -15,
+    right: 15,
+    height: 1,
+    backgroundColor: "#ccc",
+    opacity: 0.3,
+  },
   name: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 18,
     color: "#000",
   },
   statusTimeContainer: {
@@ -143,7 +143,7 @@ export const ListCallItems = StyleSheet.create({
     alignItems: "center",
   },
   time: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#666",
     marginLeft: 5,
     marginTop: 5,
@@ -152,6 +152,61 @@ export const ListCallItems = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+});
+
+export const SpecialItems = StyleSheet.create({
+  specialItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    marginVertical: 10,
+    marginHorizontal: 16,
+    overflow: "hidden"
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  info: {
+    flex: 1,
+    marginLeft: 15,
+  },
+  borderBottom: {
+    position: "absolute",
+    width: width - 125,
+    bottom: 0,
+    right: 15,
+    height: 1,
+    backgroundColor: "#ccc",
+    opacity: 0.3,
+  },
+  name: {
+    fontSize: 18,
+    color: "#000",
+  },
+  statusTimeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  content: {
+    fontSize: 14,
+    color: "#666",
+    marginTop: 5,
+    fontWeight: "bold",
+  },
+  emojiReactions: {
+    flexDirection: "row",
+    position: "relative",
+    width: 50,
+    height: 24,
+  },
+  emoji: {
+    position: "absolute",
+    fontSize: 24,
   },
 });
 
