@@ -399,3 +399,68 @@ export const listChatstyles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export const modalStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    
+  },
+  modalContent: {
+    width: "100%",
+    height: "33%",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    justifyContent: "center",
+    position: "relative",
+    backgroundColor: "#D9DBE9",
+  },
+  closeButton: {
+    position: "absolute",
+    top: 10,
+    right: 20,
+  },
+  itemContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  item: {
+    borderRadius: 20,
+    width: 144,
+    height: 160,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 15,
+    backgroundColor: "transparent",
+    overflow: "hidden",
+    shadowColor: "#10141C",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.5,
+    shadowRadius: 50,
+    elevation: 20,
+  },
+  subText: {
+    fontSize: 13,
+    paddingTop: 6,
+    color: "#A9A9A9",
+    width: "100%",
+    marginTop: 8,
+    textAlign: "left",
+  },
+  mainText: {
+    fontSize: 15,
+    color: "#FFF",
+    paddingTop: 2,
+    fontWeight: "bold",
+    width: "100%",
+    textAlign: "left",
+  },
+});
