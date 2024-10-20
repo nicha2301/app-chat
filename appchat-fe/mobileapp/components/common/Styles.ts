@@ -164,7 +164,7 @@ export const SpecialItems = StyleSheet.create({
     paddingVertical: 15,
     marginVertical: 10,
     marginHorizontal: 16,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   avatar: {
     width: 50,
@@ -410,7 +410,6 @@ export const modalStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
-    
   },
   modalContent: {
     width: "100%",
@@ -462,5 +461,98 @@ export const modalStyles = StyleSheet.create({
     fontWeight: "bold",
     width: "100%",
     textAlign: "left",
+  },
+});
+
+export const cameraScreenStyles = StyleSheet.create({
+  viewContainer: {
+    display: "flex",
+    flex: 1,
+  },
+  topBar: {
+    position: "absolute",
+    top: 20,
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    padding: 20,
+  },
+  bottomBar: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    position: "absolute",
+    bottom: 40,
+    width: "100%",
+    borderRadius: 10,
+  },
+  flashButton: {
+    padding: 12,
+    borderRadius: 30,
+  },
+  exitButton: {
+    color: "#fff",
+    padding: 12,
+    borderRadius: 30,
+  },
+  iconButton: {
+    borderRadius: 10,
+    width: 60,
+    height: 60,
+  },
+  buttonText: {
+    color: "#000",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  iconText: {
+    color: "#000",
+    textAlign: "center",
+  },
+  galleryImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+  },
+});
+
+export const cameraPreviewStyles = StyleSheet.create({
+  container: {
+    backgroundColor: "transparent",
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
+  imageBackground: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  placeholder: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ccc",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 60,
+  },
+  button: {
+    width: 80,
+    paddingVertical: 20,
+    borderRadius: 20,
+    backgroundColor: "rgba(0, 0, 0, 0.35)",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
+  buttonText: {
+    color: "#ffffff",
+    fontWeight: "600",
+    fontSize: 16,
+    letterSpacing: 1,
   },
 });
